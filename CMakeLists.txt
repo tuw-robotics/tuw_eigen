@@ -17,6 +17,7 @@ find_package(Eigen3)
 
 add_library(${PROJECT_NAME} SHARED
   src/${PROJECT_NAME}/line2d.cpp
+  src/${PROJECT_NAME}/point2d.cpp
 )
 
 target_compile_features(tuw_eigen PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17

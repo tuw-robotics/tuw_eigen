@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <vector>
 #include <memory>
+#include <tuw_eigen/point2d.hpp>
 #include <tuw_eigen/line2d.hpp>
 
 #endif  // TUW_EIGEN__EIGEN_HPP
