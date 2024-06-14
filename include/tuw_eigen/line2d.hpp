@@ -23,6 +23,7 @@ namespace tuw_eigen
       return os;
     }
     using Vector3d::Vector3d;
+
     /**
      * constructor to create a line from points
      * and normalizes equation
@@ -32,10 +33,8 @@ namespace tuw_eigen
      * @param y1
      * @param normalize normalizes equation on true
      **/
-    Line2D(double x0, double y0, double x1, double y1)
-    {
-      set(x0, y0, x1, y1);
-    }
+    Line2D(double x0, double y0, double x1, double y1);
+    
     /**
      * constructor to create a line from points
      * and normalizes equation optional
@@ -45,45 +44,33 @@ namespace tuw_eigen
      * @param y1
      * @param normalize normalizes equation on true
      **/
-    Line2D(double x0, double y0, double x1, double y1, bool normalize)
-    {
-      set(x0, y0, x1, y1, normalize);
-    }
+    Line2D(double x0, double y0, double x1, double y1, bool normalize);
+
     /**
      * @return the first equation component for x
      **/
-    const double &a() const
-    {
-      return (*this)[0];
-    }
+    const double &a() const;
+    
     /**
      * @return the second equation component for y
      **/
-    double &b()
-    {
-      return (*this)[1];
-    }
+    double &b();
+    
     /**
      * @return the second equation component for y
      **/
-    const double &b() const
-    {
-      return (*this)[1];
-    }
+    const double &b() const;
+    
     /**
      * @return the third equation component
      **/
-    double &c()
-    {
-      return (*this)[2];
-    }
+    double &c();
+    
     /**
      * @return the third equation component
      **/
-    const double &c() const
-    {
-      return (*this)[2];
-    }
+    const double &c() const;
+
     /**
      * constructor to create a line from points
      * and normalizes equation optional
@@ -94,14 +81,8 @@ namespace tuw_eigen
      * @param normalize normalizes equation on true
      * @return ref to this
      **/
-    Line2D &set(double x0, double y0, double x1, double y1, bool normalize)
-    {
-      (*this)[0] = y0 - y1, (*this)[1] = x1 - x0,
-      (*this)[2] = x0 * y1 - y0 * x1; /// cross product with homogenios vectors
-      if (normalize)
-        this->normalize();
-      return *this;
-    }
+    Line2D &set(double x0, double y0, double x1, double y1, bool normalize);
+
     /**
      * constructor to create a line from points
      * and normalizes equation
@@ -111,21 +92,13 @@ namespace tuw_eigen
      * @param y1
      * @return ref to this
      **/
-    Line2D &set(double x0, double y0, double x1, double y1)
-    {
-      (*this)[0] = y0 - y1, (*this)[1] = x1 - x0,
-      (*this)[2] = x0 * y1 - y0 * x1; /// cross product with homogenios vectors
-      this->normalize();
-      return *this;
-    }
+    Line2D &set(double x0, double y0, double x1, double y1);
+
     /**
      * normalizes the equation to a*a + b*b = 1
      **/
-    void normalize()
-    {
-      double r = std::sqrt((*this)[0] * (*this)[0] + (*this)[1] * (*this)[1]);
-      (*this)[0] /= r, (*this)[1] /= r, (*this)[2] /= r;
-    }
+    void normalize();
+
     /**
      * computes the distance to a point
      * @param x
@@ -133,10 +106,8 @@ namespace tuw_eigen
      * @returns the minimal distance to a point
      * @pre normalize
      **/
-    double distanceTo(double x, double y) const
-    {
-      return (*this)[0] * x + (*this)[1] * y + (*this)[2];
-    }
+    double distanceTo(double x, double y) const;
+
     /**
      * computes a point on the line with the shortest distance to the point given
      * @param x
@@ -144,38 +115,28 @@ namespace tuw_eigen
      * @returns point on line
      * @pre normalize
      **/
-    Point2D pointOnLine(double x, double y) const
-    {
-      double d = distanceTo(x, y);
-      return Point2D(x - d * (*this)[0], y - d * (*this)[1]);
-    }
+    Point2D pointOnLine(double x, double y) const;
+
     /**
      * computes the intersection point of two lines
      * @param l
      * @returns point on line
      * @pre normalize
      **/
-    Point2D intersection(const Line2D &l) const
-    {
-      Eigen::Vector3d h = this->cross(l);
-      return Point2D(h[0] / h[2], h[1] / h[2]);
-    }
+    Point2D intersection(const Line2D &l) const;
+
     /**
      * restuns the normal vector to a line
      * @return vector
      **/
-    Eigen::Vector2d normal() const
-    {
-      return Eigen::Vector2d((*this)[0], (*this)[1]);
-    }
+    Eigen::Vector2d normal() const;
+
     /**
      * restuns the direction vector to a line
      * @return vector
      **/
-    Eigen::Vector2d direction() const
-    {
-      return Eigen::Vector2d((*this)[1], -(*this)[0]);
-    }
+    Eigen::Vector2d direction() const;
+    
   };
 
   using Lines2D = std::vector<Line2D>;
