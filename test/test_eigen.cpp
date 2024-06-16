@@ -34,7 +34,19 @@
 
 TEST(Line2D, intersectionLine)
 {
-  tuw_eigen::Line2D l;
+  Eigen::Transform<double, 3, Eigen::Affine> transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
+
+  tuw_eigen::Pose3D pose = tuw_eigen::Pose3D::Identity();
+  std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
+  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  pose.x() = 2;
+  pose.y() = 3.;
+  pose.z() = 12.0;
+  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  pose.x() = 2;
+  pose.y() = 3.;
+  pose.z() = 12.0;
   ASSERT_TRUE(false);
 
 }

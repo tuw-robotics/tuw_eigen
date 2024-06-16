@@ -8,10 +8,12 @@ using namespace tuw_eigen;
 double &Pose3D::x()
 {
     return this->translation().x();
+    //return this->m_matrix[3];
 }
-double &Pose3D::x() const
+const double &Pose3D::x() const
 {
     return this->translation().x();
+    //return this->m_matrix(3,0);
 }
 
 const double &Pose3D::y() const
@@ -46,4 +48,8 @@ std::string Pose3D::str(const char *format) const
 
 Vector3d Pose3D::eulerAngles() const{
     return this->rotation().eulerAngles(0, 1, 2);
+}
+
+const Pose3D Pose3D::Identity(){
+    return Pose3D(MatrixType::Identity());
 }

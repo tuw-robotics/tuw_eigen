@@ -15,6 +15,7 @@ namespace tuw_eigen
    class Pose3D : public Eigen::Transform<double, 3, Eigen::Affine>
    {
    public:
+   
       using Eigen::Transform<double, 3, Eigen::Affine>::Transform;
       /**
        * translational x component
@@ -61,6 +62,10 @@ namespace tuw_eigen
        * @param format the Euler-angles of the rotation matrix
        **/
       Vector3d eulerAngles() const;
+
+
+      static const Pose3D Identity();
+      
    };
    using Poses3D = std::vector<Pose3D>;
    using Poses3DPtr = std::shared_ptr<Poses3D>;
