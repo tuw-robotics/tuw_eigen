@@ -16,7 +16,19 @@ namespace tuw_eigen
    {
    public:
    
+      /**
+       * construtor
+       * Copy all base constructors
+       **/
       using Eigen::Transform<double, 3, Eigen::Affine>::Transform;
+
+      /**
+       * construtor
+       * @param x translation
+       * @param y translation
+       * @param z translation
+       **/
+      Pose3D(double x, double y, double z);
       /**
        * translational x component
        * @return rotation

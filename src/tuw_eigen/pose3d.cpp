@@ -5,6 +5,11 @@
 
 using namespace tuw_eigen;
 
+Pose3D::Pose3D(double x, double y, double z) 
+: Transform(MatrixType::Identity()){
+  this->translate(Eigen::Vector3d(x, y, z));
+}
+
 double &Pose3D::x()
 {
     //return this->translation().x();

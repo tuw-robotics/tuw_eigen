@@ -32,22 +32,32 @@
 #include "gtest/gtest.h"
 #include "tuw_eigen/eigen.hpp"
 
+TEST(Pose3D, constructor)
+{
+  Eigen::Transform<double, 3, Eigen::Affine> transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
+  Eigen::Vector3d translation(44.0, 33.0, 11.0);
+  transform.translate(translation);
+  tuw_eigen::Pose3D pose(44, 33, 11);
+  std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
+  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  ASSERT_EQ(pose.x(), transform.translation().x());
+  ASSERT_EQ(pose.y(), transform.translation().y());
+  ASSERT_EQ(pose.z(), transform.translation().z());
+}
 TEST(Pose3D, transation)
 {
   Eigen::Transform<double, 3, Eigen::Affine> transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
+  Eigen::Vector3d translation(2.0, 3.0, 12.0);
+  transform.translate(translation);
   tuw_eigen::Pose3D pose = tuw_eigen::Pose3D::Identity();
-  std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
-  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
-  pose.x() = 2;
-  pose.y() = 3.;
+  pose.x() = 2.0;
+  pose.y() = 3.0;
   pose.z() = 12.0;
-  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
-  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
-  pose.x() = 2;
-  pose.y() = 3.;
-  pose.z() = 12.0;
-  ASSERT_TRUE(false);
-
+  //std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
+  //std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  ASSERT_EQ(pose.x(), transform.translation().x());
+  ASSERT_EQ(pose.y(), transform.translation().y());
+  ASSERT_EQ(pose.z(), transform.translation().z());
 }
 
 
