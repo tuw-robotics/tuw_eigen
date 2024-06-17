@@ -32,10 +32,9 @@
 #include "gtest/gtest.h"
 #include "tuw_eigen/eigen.hpp"
 
-TEST(Line2D, intersectionLine)
+TEST(Pose3D, transation)
 {
   Eigen::Transform<double, 3, Eigen::Affine> transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();
-
   tuw_eigen::Pose3D pose = tuw_eigen::Pose3D::Identity();
   std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
   std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;

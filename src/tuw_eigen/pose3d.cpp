@@ -7,33 +7,37 @@ using namespace tuw_eigen;
 
 double &Pose3D::x()
 {
-    return this->translation().x();
-    //return this->m_matrix[3];
+    //return this->translation().x();
+    return this->m_matrix(0,3);
 }
 const double &Pose3D::x() const
 {
-    return this->translation().x();
-    //return this->m_matrix(3,0);
+    //return this->translation().x();
+    return this->m_matrix(0,3);
 }
 
 const double &Pose3D::y() const
 {
-    return this->translation().y();
+    //return this->translation().y();
+    return this->m_matrix(1,3);
 }
 
 double &Pose3D::y()
 {
-    return this->translation().y();
+    //return this->translation().y();
+    return this->m_matrix(1,3);
 }
 
 const double &Pose3D::z() const
 {
-    return this->translation().z();
+    //return this->translation().z();
+    return this->m_matrix(2,3);
 }
 
 double &Pose3D::z()
 {
-    return this->translation().z();
+    //return this->translation().z();
+    return this->m_matrix(2,3);
 }
 
 std::string Pose3D::str(const char *format) const
