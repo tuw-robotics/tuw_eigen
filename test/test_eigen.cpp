@@ -38,8 +38,8 @@ TEST(Pose3D, constructor)
   Eigen::Vector3d translation(44.0, 33.0, 11.0);
   transform.translate(translation);
   tuw_eigen::Pose3D pose(44, 33, 11);
-  std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
-  std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  //std::cout << "transform matrix:\n" << transform.matrix() << std::endl;
+  //std::cout << "pose      matrix:\n" << pose.matrix() << std::endl;
   ASSERT_EQ(pose.x(), transform.translation().x());
   ASSERT_EQ(pose.y(), transform.translation().y());
   ASSERT_EQ(pose.z(), transform.translation().z());
@@ -53,13 +53,22 @@ TEST(Pose3D, transation)
   pose.x() = 2.0;
   pose.y() = 3.0;
   pose.z() = 12.0;
-  //std::cout << "Initial transformation matrix:\n" << transform.matrix() << std::endl;
-  //std::cout << "Initial transformation matrix:\n" << pose.matrix() << std::endl;
+  //std::cout << "transform matrix:\n" << transform.matrix() << std::endl;
+  //std::cout << "pose      matrix:\n" << pose.matrix() << std::endl;
   ASSERT_EQ(pose.x(), transform.translation().x());
   ASSERT_EQ(pose.y(), transform.translation().y());
   ASSERT_EQ(pose.z(), transform.translation().z());
 }
 
+TEST(Line2D, intersection)
+{
+  tuw_eigen::Line2D l1(0., 0., 0., 1.);
+  tuw_eigen::Line2D l2(0., 0., 1., 0.);
+  tuw_eigen::Point2D p = l1.intersection(l2);
+  std::cout << "point:\n" << p << std::endl;
+  //std::cout << "pose      matrix:\n" << pose.matrix() << std::endl;
+  ASSERT_EQ(p, tuw_eigen::Point2D(0,0));
+}
 
 int main(int argc, char ** argv)
 {

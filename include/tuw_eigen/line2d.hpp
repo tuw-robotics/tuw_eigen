@@ -22,7 +22,24 @@ namespace tuw_eigen
       os << "[" << o.a() << ", " << o.b() << ", " << o.c() << "]";
       return os;
     }
-    using Vector3d::Vector3d;
+    /**
+     * constructor 
+     **/
+    Line2D();
+
+    /**
+     * constructor  to create a line from equation
+     * @param a
+     * @param b
+     * @param c
+     **/
+    Line2D(double a, double b, double c);
+
+    /**
+     * constructor  to create a line from equation
+     * @param eq [a, b, c]
+     **/
+    Line2D(const Vector3d& eq);
 
     /**
      * constructor to create a line from points

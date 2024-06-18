@@ -6,6 +6,9 @@
 
 using namespace tuw_eigen;
 
+Line2D::Line2D() : Vector3d(){};
+Line2D::Line2D(double a, double b, double c) : Vector3d(a, b, c){};
+Line2D::Line2D(const Vector3d &eq) : Vector3d(eq){};
 Line2D::Line2D(double x0, double y0, double x1, double y1)
 {
     set(x0, y0, x1, y1);
