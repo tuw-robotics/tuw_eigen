@@ -17,6 +17,7 @@ find_package(Eigen3)
 
 add_library(${PROJECT_NAME} SHARED
   src/${PROJECT_NAME}/line2d.cpp
+  src/${PROJECT_NAME}/linesegment2d.cpp
   src/${PROJECT_NAME}/point2d.cpp
   src/${PROJECT_NAME}/point3d.cpp
   src/${PROJECT_NAME}/pose3d.cpp

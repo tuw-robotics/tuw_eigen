@@ -9,14 +9,13 @@ using namespace tuw_eigen;
 Line2D::Line2D() : Vector3d(){};
 Line2D::Line2D(double a, double b, double c) : Vector3d(a, b, c){};
 Line2D::Line2D(const Vector3d &eq) : Vector3d(eq){};
+Line2D::Line2D(const Point2D & p0, const Point2D & p1)
+{
+    set(p0, p1);
+}
 Line2D::Line2D(double x0, double y0, double x1, double y1)
 {
     set(x0, y0, x1, y1);
-}
-
-Line2D::Line2D(double x0, double y0, double x1, double y1, bool normalize)
-{
-    set(x0, y0, x1, y1, normalize);
 }
 
 const double &Line2D::a() const
@@ -44,21 +43,15 @@ const double &Line2D::c() const
     return (*this)[2];
 }
 
-Line2D &Line2D::set(double x0, double y0, double x1, double y1, bool normalize)
-{
-    (*this)[0] = y0 - y1, (*this)[1] = x1 - x0,
-    (*this)[2] = x0 * y1 - y0 * x1; /// cross product with homogenios vectors
-    if (normalize)
-        this->normalize();
-    return *this;
-}
-
 Line2D &Line2D::set(double x0, double y0, double x1, double y1)
 {
-    (*this)[0] = y0 - y1, (*this)[1] = x1 - x0,
-    (*this)[2] = x0 * y1 - y0 * x1; /// cross product with homogenios vectors
-    this->normalize();
-    return *this;
+    compute_line_equation(x0, y0, x1, y1, (*this));
+    return (*this);
+}
+Line2D &Line2D::set(const Point2D & p0, const Point2D & p1)
+{
+    compute_line_equation(p0.x(), p0.y(), p1.x(), p1.y(), (*this));
+    return (*this);
 }
 
 void Line2D::normalize()

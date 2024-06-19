@@ -54,14 +54,11 @@ namespace tuw_eigen
     
     /**
      * constructor to create a line from points
-     * and normalizes equation optional
-     * @param x0
-     * @param y0
-     * @param x1
-     * @param y1
-     * @param normalize normalizes equation on true
+     * and normalizes equation
+     * @param p0
+     * @param p1
      **/
-    Line2D(double x0, double y0, double x1, double y1, bool normalize);
+    Line2D(const Point2D & p0, const Point2D & p1);
 
     /**
      * @return the first equation component for x
@@ -90,15 +87,12 @@ namespace tuw_eigen
 
     /**
      * constructor to create a line from points
-     * and normalizes equation optional
-     * @param x0
-     * @param y0
-     * @param x1
-     * @param y1
-     * @param normalize normalizes equation on true
+     * and normalizes equation
+     * @param p0
+     * @param p1
      * @return ref to this
      **/
-    Line2D &set(double x0, double y0, double x1, double y1, bool normalize);
+    Line2D &set(const Point2D & p0, const Point2D & p1);
 
     /**
      * constructor to create a line from points
@@ -154,6 +148,15 @@ namespace tuw_eigen
      **/
     Eigen::Vector2d direction() const;
     
+    
+    template<typename T>
+    static void compute_line_equation(const T &x0, const T &y0, const T &x1, const T &y1, Eigen::Matrix<T, 3, 1> &des){
+        des[0] = y0 - y1;
+        des[1] = x1 - x0,
+        des[2] = x0 * y1 - y0 * x1; /// cross product with homogenios vectors
+        T r = std::sqrt(des[0] * des[0] + des[1] * des[1]);
+        des[0] /= r, des[1] /= r, des[2] /= r;
+    }
   };
 
   using Lines2D = std::vector<Line2D>;
