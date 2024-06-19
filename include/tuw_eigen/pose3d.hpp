@@ -23,6 +23,18 @@ namespace tuw_eigen
       using Eigen::Transform<double, 3, Eigen::Affine>::Transform;
 
       /**
+       * copy construtor
+       * @param src
+       **/
+      Pose3D(const Eigen::Transform<double, 3, Eigen::Affine> &src);
+
+      /**
+       * copy construtor
+       * @param src
+       **/
+      Pose3D(const Pose3D &src);
+
+      /**
        * construtor
        * @param x translation
        * @param y translation
