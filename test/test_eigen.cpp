@@ -65,9 +65,21 @@ TEST(Line2D, intersection)
   tuw_eigen::Line2D l1(0., 0., 0., 1.);
   tuw_eigen::Line2D l2(0., 0., 1., 0.);
   tuw_eigen::Point2D p = l1.intersection(l2);
-  std::cout << "point:\n" << p << std::endl;
+  //std::cout << "point:\n" << p << std::endl;
   //std::cout << "pose      matrix:\n" << pose.matrix() << std::endl;
   ASSERT_EQ(p, tuw_eigen::Point2D(0,0));
+}
+
+
+TEST(LineSegment2D, closestPoint)
+{
+  tuw_eigen::LineSegment2D l1(0., 0., 0., 1.);
+  tuw_eigen::Point2D p = l1.closestPointTo(tuw_eigen::Point2D(-1.,-1));
+  ASSERT_EQ(p, tuw_eigen::Point2D(0,0));
+  p = l1.closestPointTo(tuw_eigen::Point2D(2.,2));
+  ASSERT_EQ(p, tuw_eigen::Point2D(0.,1.));
+  p = l1.closestPointTo(tuw_eigen::Point2D(2.,0.5));
+  ASSERT_EQ(p, tuw_eigen::Point2D(0.,0.5));
 }
 
 int main(int argc, char ** argv)

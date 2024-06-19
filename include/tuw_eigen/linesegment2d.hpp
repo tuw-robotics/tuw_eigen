@@ -26,6 +26,14 @@ namespace tuw_eigen
      * @param p1
      **/
     LineSegment2D(const Point2D &p0, const Point2D &p1);
+  /**
+     * constructor to create a line from points
+     * @param x0
+     * @param y0
+     * @param x1
+     * @param y1
+     **/
+  LineSegment2D(double x0, double y0, double x1, double y1);
 
     /**
      * sets a line from points

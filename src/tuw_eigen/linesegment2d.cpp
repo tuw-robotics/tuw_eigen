@@ -11,6 +11,10 @@ LineSegment2D::LineSegment2D(const Point2D &p0, const Point2D &p1)
 {
 }
 
+LineSegment2D::LineSegment2D(double x0, double y0, double x1, double y1)
+: Line2D(x0, y0, x1, y1), p0_(x0, y0), p1_(x1, y1)
+{
+}
 const double & LineSegment2D::x0() const {return p0_.x();}
 const double & LineSegment2D::y0() const {return p0_.y();}
 const double & LineSegment2D::x1() const {return p1_.x();}
