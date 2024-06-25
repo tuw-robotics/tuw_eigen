@@ -10,12 +10,13 @@ Pose3D::Pose3D(double x, double y, double z)
   this->translate(Eigen::Vector3d(x, y, z));
 }
 
-Pose3D::Pose3D(const Pose3D &src){
-    *this = src;
+Pose3D::Pose3D(const Pose3D &src) 
+: Transform(src)
+{
 }
 Pose3D::Pose3D(const Eigen::Transform<double, 3, Eigen::Affine> &src)
+: Transform(src)
 {
-    *this = src;
 }
 
 double &Pose3D::x()
