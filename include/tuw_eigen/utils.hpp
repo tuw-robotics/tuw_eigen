@@ -5,6 +5,7 @@
 #include <vector>
 #include <cmath>
 #include <Eigen/Geometry>
+
 namespace tuw_eigen
 {
   using Vector2d = Eigen::Matrix<double, 2, 1>;

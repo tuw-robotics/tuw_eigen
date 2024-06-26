@@ -14,6 +14,7 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3)
+find_package(Eigen3)
 
 add_library(${PROJECT_NAME} SHARED
   src/${PROJECT_NAME}/line2d.cpp

@@ -2,6 +2,7 @@
 #define TUW_EIGEN__POINT2D_HPP
 
 #include <tuw_eigen/utils.hpp>
+#include <tuw_eigen/geometry_msgs.hpp>
 
 namespace tuw_eigen
 {
@@ -22,6 +23,37 @@ namespace tuw_eigen
          return os;
       }
       using Vector2d::Vector2d;
+
+      /**
+       * constructor to generate a point from a ros geometry_msgs point
+       **/
+      template<class ContainerAllocator>
+      Point2D(const geometry_msgs::msg::Point_<ContainerAllocator> &p)
+      : Vector2d(p.x, p.y)
+      {}
+
+      
+      /**
+       * copies x and y to a geometry_msgs point and leaves z untouched
+       * @param ros geometry point object
+       * @return point
+       **/
+      template<class ContainerAllocator>
+      geometry_msgs::msg::Point_<ContainerAllocator> &copy_to(geometry_msgs::msg::Point_<ContainerAllocator> &p){
+         p.x = this->x(), p.y = this->y();
+         return p;
+      }
+      
+      /**
+       * copies x and y to a geometry_msgs point and sets z to 0
+       * @param ros geometry point object
+       * @return point
+       **/
+      template<class ContainerAllocator>
+      geometry_msgs::msg::Point_<ContainerAllocator> &copy_to_clear(geometry_msgs::msg::Point_<ContainerAllocator> &p){
+         p.x = this->x(), p.y = this->y(), p.z = 0;
+         return p;
+      }
 
       /**
        * translational x component
