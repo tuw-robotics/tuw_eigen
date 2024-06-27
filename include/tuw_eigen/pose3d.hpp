@@ -3,6 +3,7 @@
 
 #include <tuw_eigen/point3d.hpp>
 #include <tuw_eigen/utils.hpp>
+#include <tuw_eigen/geometry_msgs.hpp>
 
 namespace tuw_eigen
 {
@@ -17,7 +18,6 @@ namespace tuw_eigen
    class Pose3D : public Eigen::Transform<double, 3, Eigen::Affine>
    {
    public:
-   
       /**
        * construtor
        * Copy all base constructors
@@ -47,7 +47,7 @@ namespace tuw_eigen
       /**
        * computes the pose based on a position and a point to look at
        * @param position poistion
-       * @param point_ahead 
+       * @param point_ahead
        **/
       Pose3D(const Point3D &position, const Point3D &point_ahead);
 
@@ -90,7 +90,6 @@ namespace tuw_eigen
        **/
       std::string str(const char *format) const;
 
-
       /**
        * Position
        * @return position
@@ -100,10 +99,10 @@ namespace tuw_eigen
       /**
        * computes the pose based on a position and a point to look at
        * @param position poistion
-       * @param point_ahead 
+       * @param point_ahead
        * @return this
        **/
-      Pose3D& set(const Point3D &position, const Point3D &point_ahead);
+      Pose3D &set(const Point3D &position, const Point3D &point_ahead);
 
       /**
        * Angles around x, y, z
@@ -111,9 +110,53 @@ namespace tuw_eigen
        **/
       Vector3d eulerAngles() const;
 
+      /**
+       * copies the pose to a geometry_msgs object
+       * @param ros geometry pose object
+       * @return point
+       **/
+      template <class ContainerAllocator>
+      geometry_msgs::msg::Pose_<ContainerAllocator> &copy_to(geometry_msgs::msg::Pose_<ContainerAllocator> &p)
+      {
+         p.position.x = this->x();
+         p.position.y = this->y();
+         p.position.z = this->z();
+
+         // Extract the rotation part (3x3 matrix)
+         Eigen::Matrix3d rotationMatrix = this->rotation();
+
+         // Convert the rotation matrix to a quaternion
+         Eigen::Quaterniond quaternion(rotationMatrix);
+
+         p.orientation.x = quaternion.x();
+         p.orientation.y = quaternion.y();
+         p.orientation.z = quaternion.z();
+         p.orientation.w = quaternion.w();
+         return p;
+      }      
+      
+      /**
+       * copies the pose from a geometry_msgs object
+       * @param ros geometry pose object
+       * @return point
+       **/
+      template <class ContainerAllocator>
+      Pose3D &copy_from(geometry_msgs::msg::Pose_<ContainerAllocator> &p)
+      {
+         this->x() = p.position.x;
+         this->y() = p.position.y;
+         this->z() = p.position.z;
+         
+         // Extract the rotation part (3x3 matrix)
+         Eigen::Matrix3d rotationMatrix = this->rotation();
+
+         // Convert the rotation matrix to a quaternion
+         Eigen::Quaterniond quaternion( p.orientation.x, p.orientation.y, p.orientation.z, p.orientation.w);
+         this->linear() = quaternion.toRotationMatrix();
+         return p;
+      }
 
       static const Pose3D Identity();
-      
    };
    using Poses3D = std::vector<Pose3D>;
    using Poses3DPtr = std::shared_ptr<Poses3D>;
