@@ -56,7 +56,7 @@ Line2D &Line2D::set(const Point2D & p0, const Point2D & p1)
 
 void Line2D::normalize()
 {
-    double r = std::sqrt((*this)[0] * (*this)[0] + (*this)[1] * (*this)[1]);
+    double r = std::hypot((*this)[0], (*this)[1]);
     (*this)[0] /= r, (*this)[1] /= r, (*this)[2] /= r;
 }
 
@@ -70,6 +70,12 @@ Point2D Line2D::pointOnLine(double x, double y) const
     double d = distanceTo(x, y);
     return Point2D(x - d * (*this)[0], y - d * (*this)[1]);
 }
+
+Point2D Line2D::pointOnLine(const Point2D &p) const
+{
+    return this->pointOnLine(p.x(), p.y());
+}
+
 
 Point2D Line2D::intersection(const Line2D &l) const
 {

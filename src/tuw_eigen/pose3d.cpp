@@ -19,6 +19,34 @@ Pose3D::Pose3D(const Eigen::Transform<double, 3, Eigen::Affine> &src)
 {
 }
 
+Pose3D::Pose3D(const Point3D &position, const Point3D &point_ahead)
+: Transform(MatrixType::Identity()){
+set(position, point_ahead);
+}
+
+Pose3D& Pose3D::set(const Point3D &position, const Point3D &point_ahead){ 
+    // Compute direction vector from origin to target
+    Eigen::Vector3d direction = (point_ahead - position).normalized();
+    // Handle the case when up and target are collinear
+
+
+    // Compute yaw 
+    double yaw = std::atan2(direction.y(), direction.x());
+
+
+    // Compute yaw 
+    double pitch = std::asin(-direction.z());
+
+    Eigen::Matrix3d  rotationMatrix;
+    rotationMatrix = Eigen::AngleAxisd(yaw, Eigen::Vector3d::UnitZ()) *
+                     Eigen::AngleAxisd(pitch, Eigen::Vector3d::UnitY());
+
+    this->linear() = rotationMatrix;
+    this->translation() = position;
+
+    return *this;
+}
+
 double &Pose3D::x()
 {
     //return this->translation().x();
@@ -54,6 +82,9 @@ double &Pose3D::z()
     return this->m_matrix(2,3);
 }
 
+Point3D Pose3D::position() const{
+    return this->translation();
+}
 std::string Pose3D::str(const char *format) const
 {
     Vector3d t = this->translation();

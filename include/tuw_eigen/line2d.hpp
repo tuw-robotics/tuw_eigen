@@ -127,6 +127,13 @@ namespace tuw_eigen
      * @pre normalize
      **/
     Point2D pointOnLine(double x, double y) const;
+    /**
+     * computes a point on the line with the shortest distance to the point given
+     * @param p
+     * @returns point on line
+     * @pre normalize
+     **/
+    Point2D pointOnLine(const Point2D &p) const;
 
     /**
      * computes the intersection point of two lines
@@ -154,7 +161,7 @@ namespace tuw_eigen
         des[0] = y0 - y1;
         des[1] = x1 - x0,
         des[2] = x0 * y1 - y0 * x1; /// cross product with homogenios vectors
-        T r = std::sqrt(des[0] * des[0] + des[1] * des[1]);
+        T r = std::hypot(des[0], des[1]);
         des[0] /= r, des[1] /= r, des[2] /= r;
     }
   };

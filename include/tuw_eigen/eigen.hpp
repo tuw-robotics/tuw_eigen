@@ -7,6 +7,7 @@
 #include <tuw_eigen/point2d.hpp>
 #include <tuw_eigen/line2d.hpp>
 #include <tuw_eigen/linesegment2d.hpp>
+#include <tuw_eigen/point3d.hpp>
 #include <tuw_eigen/pose3d.hpp>
 
 #endif  // TUW_EIGEN__EIGEN_HPP

@@ -27,14 +27,13 @@ double &Point2D::y()
 
 double Point2D::distanceTo(const Point2D &p) const
 {
-    double dx = p[0] - (*this)[0], dy = p[1] - (*this)[1];
-    return std::sqrt(dx * dx + dy * dy);
+    return distanceTo(p[0], p[1]);
 }
 
 double Point2D::distanceTo(double x, double y) const
 {
     double dx = x - (*this)[0], dy = y - (*this)[1];
-    return std::sqrt(dx * dx + dy * dy);
+    return std::hypot(dx, dy);
 }
 
 double Point2D::angle() const
@@ -44,7 +43,7 @@ double Point2D::angle() const
 
 double Point2D::radius() const
 {
-    return std::sqrt((*this)[0] * (*this)[0] + (*this)[1] * (*this)[1]);
+    return std::hypot((*this)[0], (*this)[1]);
 }
 
 bool Point2D::inside(double x0, double y0, double x1, double y1) const

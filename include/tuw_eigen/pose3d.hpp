@@ -1,6 +1,7 @@
 #ifndef TUW_EIGEN__POSE3D_HPP
 #define TUW_EIGEN__POSE3D_HPP
 
+#include <tuw_eigen/point3d.hpp>
 #include <tuw_eigen/utils.hpp>
 
 namespace tuw_eigen
@@ -10,7 +11,8 @@ namespace tuw_eigen
    using Pose3DConstPtr = std::shared_ptr<Pose3D const>;
 
    /**
-    * class to represent a transform in 3D space
+    * class to represent a pose in 3D space
+    * Which is the inverse of the transform into that pose space
     **/
    class Pose3D : public Eigen::Transform<double, 3, Eigen::Affine>
    {
@@ -41,6 +43,14 @@ namespace tuw_eigen
        * @param z translation
        **/
       Pose3D(double x, double y, double z);
+
+      /**
+       * computes the pose based on a position and a point to look at
+       * @param position poistion
+       * @param point_ahead 
+       **/
+      Pose3D(const Point3D &position, const Point3D &point_ahead);
+
       /**
        * translational x component
        * @return rotation
@@ -80,6 +90,20 @@ namespace tuw_eigen
        **/
       std::string str(const char *format) const;
 
+
+      /**
+       * Position
+       * @return position
+       **/
+      Point3D position() const;
+
+      /**
+       * computes the pose based on a position and a point to look at
+       * @param position poistion
+       * @param point_ahead 
+       * @return this
+       **/
+      Pose3D& set(const Point3D &position, const Point3D &point_ahead);
 
       /**
        * Angles around x, y, z

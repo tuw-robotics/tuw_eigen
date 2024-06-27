@@ -34,6 +34,7 @@ double &Point3D::z()
     return (*this)[2];
 }
 
+
 double Point3D::distanceTo(const Point3D &p) const
 {
     return ((*this)-p).norm();

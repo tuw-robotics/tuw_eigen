@@ -82,6 +82,60 @@ TEST(LineSegment2D, closestPoint)
   ASSERT_EQ(p, tuw_eigen::Point2D(0.,0.5));
 }
 
+TEST(Pose3d, transformations_on_XY)
+{
+  tuw_eigen::Point3D pw0 (3,-2,0);
+  tuw_eigen::Point3D pw1 (4,-3,0);
+  tuw_eigen::Pose3D pose(pw0, pw1);
+  ASSERT_EQ(pose.position(), pw0);
+  tuw_eigen::Point3D pt0 = pose.inverse() * pw0;
+  ASSERT_EQ(pt0, tuw_eigen::Point3D(0,0,0));
+  double d = (pw0 - pw1).norm();
+  tuw_eigen::Point3D pt1(d, 0, 0);
+  tuw_eigen::Point3D ptmp = pose * pt1;
+  ASSERT_EQ(ptmp, pw1);
+}
+TEST(Pose3d, transformations_on_XYZ_yaw_negative__pitch_negative)
+{
+  tuw_eigen::Point3D pw0 (3,-2,0);
+  tuw_eigen::Point3D pw1 (4,-3,1);
+  tuw_eigen::Pose3D pose(pw0, pw1);
+  ASSERT_EQ(pose.position(), pw0);
+  tuw_eigen::Point3D pt0 = pose.inverse() * pw0;
+  ASSERT_EQ(pt0, tuw_eigen::Point3D(0,0,0));
+  double d = (pw0 - pw1).norm();
+  tuw_eigen::Point3D pt1(d, 0, 0);
+  tuw_eigen::Point3D ptmp = pose * pt1;
+  ASSERT_NEAR((ptmp - pw1).norm(), 0. , 0.001);
+}
+TEST(Pose3d, transformations_on_XYZ_yaw_positiv__pitch_negative)
+{
+  tuw_eigen::Point3D pw0 (-2,-3, 2);
+  tuw_eigen::Point3D pw1 ( 1, 1, 5);
+  tuw_eigen::Pose3D pose(pw0, pw1);
+  ASSERT_EQ(pose.position(), pw0);
+  tuw_eigen::Point3D pt0 = pose.inverse() * pw0;
+  ASSERT_EQ(pt0, tuw_eigen::Point3D(0,0,0));
+  double d = (pw0 - pw1).norm();
+  tuw_eigen::Point3D pt1(d, 0, 0);
+  tuw_eigen::Point3D ptmp = pose * pt1;
+  ASSERT_NEAR((ptmp - pw1).norm(), 0. , 0.001);
+}
+TEST(Pose3d, transformations_on_XYZ_yaw_positiv__pitch_positiv)
+{
+  tuw_eigen::Point3D pw0 (-2,-3, 2);
+  tuw_eigen::Point3D pw1 ( 1, 1, 0);
+  tuw_eigen::Pose3D pose(pw0, pw1);
+  ASSERT_EQ(pose.position(), pw0);
+  tuw_eigen::Point3D pt0 = pose.inverse() * pw0;
+  ASSERT_EQ(pt0, tuw_eigen::Point3D(0,0,0));
+  double d = (pw0 - pw1).norm();
+  tuw_eigen::Point3D pt1(d, 0, 0);
+  tuw_eigen::Point3D ptmp = pose * pt1;
+  ASSERT_NEAR((ptmp - pw1).norm(), 0. , 0.001);
+}
+
+
 int main(int argc, char ** argv)
 {
   rclcpp::init(argc, argv);
