@@ -56,29 +56,6 @@ namespace tuw_eigen
       }
 
       /**
-       * translational x component
-       * @return rotation
-       **/
-      const double &x() const;
-
-      /**
-       * translational x component
-       * @return rotation
-       **/
-      double &x();
-      /**
-       * translational y component
-       * @return y component
-       **/
-      const double &y() const;
-
-      /**
-       * translational y component
-       * @return y component
-       **/
-      double &y();
-
-      /**
        * returns the distance to an other point
        * @return disance
        **/

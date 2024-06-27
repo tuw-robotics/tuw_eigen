@@ -5,36 +5,6 @@
 
 using namespace tuw_eigen;
 
-const double &Point3D::x() const
-{
-    return (*this)[0];
-}
-
-double &Point3D::x()
-{
-    return (*this)[0];
-}
-
-const double &Point3D::y() const
-{
-    return (*this)[1];
-}
-
-double &Point3D::y()
-{
-    return (*this)[1];
-}
-const double &Point3D::z() const
-{
-    return (*this)[2];
-}
-
-double &Point3D::z()
-{
-    return (*this)[2];
-}
-
-
 double Point3D::distanceTo(const Point3D &p) const
 {
     return ((*this)-p).norm();

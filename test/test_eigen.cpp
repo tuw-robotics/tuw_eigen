@@ -32,6 +32,32 @@
 #include "gtest/gtest.h"
 #include "tuw_eigen/eigen.hpp"
 
+
+TEST(Point2D, assignment)
+{
+  tuw_eigen::Point2D p0(1.1, 2.2);
+  tuw_eigen::Point2D p1(3.1, 4.2);
+  ASSERT_EQ(p0.x(), 1.1);
+  ASSERT_EQ(p0.y(), 2.2);
+  p0.x() = 3.1, p0.y() = 4.2;
+  ASSERT_EQ(p0.x(), 3.1);
+  ASSERT_EQ(p0.y(), 4.2);
+  ASSERT_EQ(p0, p1);
+}
+TEST(Point3D, assignment)
+{
+  tuw_eigen::Point3D p0(1.1, 2.2, 3.3);
+  tuw_eigen::Point3D p1(3.1, 4.2, 6.3);
+  ASSERT_EQ(p0.x(), 1.1);
+  ASSERT_EQ(p0.y(), 2.2);
+  ASSERT_EQ(p0.z(), 3.3);
+  p0.x() = 3.1, p0.y() = 4.2, p0.z() = 6.3;
+  ASSERT_EQ(p0.x(), 3.1);
+  ASSERT_EQ(p0.y(), 4.2);
+  ASSERT_EQ(p0.z(), 6.3);
+  ASSERT_EQ(p0, p1);
+}
+
 TEST(Pose3D, constructor)
 {
   Eigen::Transform<double, 3, Eigen::Affine> transform = Eigen::Transform<double, 3, Eigen::Affine>::Identity();

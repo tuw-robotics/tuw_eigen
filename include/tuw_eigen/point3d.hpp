@@ -23,40 +23,6 @@ namespace tuw_eigen
       using Vector3d::Vector3d;
 
       /**
-       * translational x component
-       * @return rotation
-       **/
-      const double &x() const;
-
-      /**
-       * translational x component
-       * @return rotation
-       **/
-      double &x();
-      /**
-       * translational y component
-       * @return y component
-       **/
-      const double &y() const;
-
-      /**
-       * translational y component
-       * @return y component
-       **/
-      double &y();
-      /**
-       * translational z component
-       * @return rotation
-       **/
-      const double &z() const;
-
-      /**
-       * translational z component
-       * @return rotation
-       **/
-      double &z();
-
-      /**
        * returns the distance to an other point
        * @return disance
        **/

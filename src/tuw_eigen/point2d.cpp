@@ -5,26 +5,6 @@
 
 using namespace tuw_eigen;
 
-const double &Point2D::x() const
-{
-    return (*this)[0];
-}
-
-double &Point2D::x()
-{
-    return (*this)[0];
-}
-
-const double &Point2D::y() const
-{
-    return (*this)[1];
-}
-
-double &Point2D::y()
-{
-    return (*this)[1];
-}
-
 double Point2D::distanceTo(const Point2D &p) const
 {
     return distanceTo(p[0], p[1]);
