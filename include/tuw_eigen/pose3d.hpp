@@ -110,6 +110,12 @@ namespace tuw_eigen
        **/
       Vector3d eulerAngles() const;
 
+
+      template <class ContainerAllocator>
+      geometry_msgs::msg::Pose_<ContainerAllocator> &set_translation(geometry_msgs::msg::Point_<ContainerAllocator> &p){
+         this->translation() = Vector3d(p.x, p.y, p.z);
+      }
+
       /**
        * copies the pose to a geometry_msgs object
        * @param ros geometry pose object

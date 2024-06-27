@@ -2,6 +2,7 @@
 #define TUW_EIGEN__POINT3D_HPP
 
 #include <tuw_eigen/utils.hpp>
+#include <tuw_eigen/geometry_msgs.hpp>
 
 namespace tuw_eigen
 {
@@ -58,6 +59,20 @@ namespace tuw_eigen
        * @param tolerance
        **/
       bool equal(const Point3D &o, double tolerance) const;
+      
+      
+      /**
+       * copies x and y to a geometry_msgs point and leaves z untouched
+       * @param ros geometry point object
+       * @return point
+       **/
+      template<class ContainerAllocator>
+      geometry_msgs::msg::Point_<ContainerAllocator> &copy_from(geometry_msgs::msg::Point_<ContainerAllocator> &p){
+         this->x() = p.x; 
+         this->y() = p.y; 
+         this->z() = p.z;
+         return p;
+      }
       
    };
    using Points3D = std::vector<Point3D>;
